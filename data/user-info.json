@@ -1,0 +1,17 @@
+{
+  "ownerInfo": {
+    "name": "Shubham Rawat",
+    "address": "Gauchar, Uttarakhand",
+    "tel": "tel:+919639304451",
+    "whatsappLink": "https://wa.me/919639304451"
+  },
+  "carInfo": {
+    "registrationNo": "UK 07 HN 5432",
+    "carImageLink": "src/images/gv.avif"
+  },
+  "familyContacts": [
+    { "name": "Mother", "tel": "+919675800918" },
+    { "name": "Brother", "tel": "+918979654379" },
+    { "name": "Brother-in-law", "tel": "+919910659308" }
+  ]
+}
