@@ -23,7 +23,7 @@ jobs:
           cp -R src/stylesheets dist/src/
           cp -R src/scripts dist/src/
           mkdir -p dist/data
-          cp data/user-details.json dist/data/
+          cp data/user-info.json dist/data/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
