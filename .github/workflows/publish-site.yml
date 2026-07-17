@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
@@ -8,22 +8,35 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Validate required files
+      - name: Prepare site files
         run: |
-          test -f index.html
-          test -f src/stylesheets/style.css || true
-          test -f src/scripts/app.js || true
-          test -f data/user-details.json || true
-          test -d src/images
+          mkdir -p dist
+          cp index.html dist/
+          mkdir -p dist/src
+          cp -R src/images dist/src/
+          cp -R src/stylesheets dist/src/
+          cp -R src/scripts dist/src/
+          mkdir -p dist/data
+          cp data/user-details.json dist/data/
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          path: dist
+
+  deploy:
+    needs: pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
